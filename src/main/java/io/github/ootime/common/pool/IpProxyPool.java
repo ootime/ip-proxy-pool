@@ -8,7 +8,7 @@ import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 public class IpProxyPool extends GenericObjectPool<IpProxy> {
 
     public IpProxyPool(GenericObjectPoolConfig<IpProxy> config){
-        this(new IpProxyFactory(config),config);
+        this(new IpProxyFactory(),config);
     }
 
 

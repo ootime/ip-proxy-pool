@@ -14,8 +14,8 @@ public class ProxyResourceTest {
 
    @Test
    public  void generateResource() throws InterruptedException, IOException {
-        Ip3366Resource resource = new Ip3366Resource(1,1,5);//50秒内重复请求默认翻页
-        List<IpProxy>  proxies = resource.getResource();
-        System.out.println(Arrays.toString(proxies.toArray()));
+//        Ip3366Resource resource = new Ip3366Resource(1,1,5);//50秒内重复请求默认翻页
+//        List<IpProxy>  proxies = resource.getResource();
+//        System.out.println(Arrays.toString(proxies.toArray()));
    }
 }

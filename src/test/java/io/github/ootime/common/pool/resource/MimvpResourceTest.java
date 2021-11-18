@@ -14,8 +14,8 @@ import java.util.concurrent.TimeUnit;
 public class MimvpResourceTest extends TestCase {
 
     public void testLoadResource() throws IOException, TesseractException {
-        MimvpResource mimvpResource = new MimvpResource(1,10);
-        System.out.println(mimvpResource.getResource());
+//        MimvpResource mimvpResource = new MimvpResource(1,10);
+//        System.out.println(mimvpResource.getResource());
 //        System.out.println(mimvpResource.getResource());
 //        System.out.println(mimvpResource.getResource());
 //        System.out.println(mimvpResource.getResource());

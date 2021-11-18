@@ -16,20 +16,11 @@ import javax.imageio.ImageIO;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.*;
 
 public class MimvpResource extends ProxyResource{
 
-    private long turnPageTime;
-
-
-    private AtomicInteger atomicPage;
 
    private static ITesseract ins = new Tesseract();
 
@@ -43,44 +34,17 @@ public class MimvpResource extends ProxyResource{
     public long lastTime;
     private int  initSize;
 
-    public MimvpResource( int page,int initSize){
-        this.atomicPage = new AtomicInteger(page);
-        TimeUnit unit = TimeUnit.SECONDS;
-        this.turnPageTime = unit.toMillis(500);
-        this.initSize = initSize;
+    public MimvpResource( ){
     }
 
-    @Override
-    public List<IpProxy> getResource() {
-        List<IpProxy> list =  super.getResource();
-
-        while (list.size()<initSize){
-            List<IpProxy> ips = super.getResource();
-            if(ips.size()==0){
-                break;
-            }
-            list.addAll(ips);
-        }
-        return list;
-    }
 
     @Override
-    public List<IpProxy> loadResource(){
-        List<IpProxy> proxies = new ArrayList<>();
-        int page = atomicPage.get();
-        if(lastTime > 0){
-            long end = System.currentTimeMillis()-lastTime;
-            if(turnPageTime>end){
-                page = atomicPage.incrementAndGet();
-            }else{
-                atomicPage.set(1);
-                page = atomicPage.get();
-            }
-        }
-        System.out.println("当前页面:"+page);
+    public Set<IpProxy> loadResource(){
+        Set<IpProxy> proxies = new HashSet<>();
         try {
-            Connection.Response response = Jsoup.connect("https://proxy.mimvp.com/freeopen?proxy=in_hp&sort=&page="+page)
+            Connection.Response response = Jsoup.connect("https://proxy.mimvp.com/freeopen?proxy=in_hp&sort=&page=1")
                     .ignoreContentType(true)
+                    .timeout(3000)
                     .method(Connection.Method.GET).execute();
             Document document = response.parse();
             Element list = document.getElementById("mimvp-body");
