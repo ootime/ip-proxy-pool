@@ -19,6 +19,7 @@ public class IpResourceData {
     public IpResourceData(){
         resourceList.add(new Ip3366ResourceTest());
         resourceList.add(new MimvpResource());
+        resourceList.add(new SeofangfaResource());
         load();
         Thread thread = new Thread(new RefreshResource(this));
         thread.setDaemon(true);

@@ -10,14 +10,9 @@ import org.apache.commons.pool2.impl.DefaultPooledObject;
 import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 
-/**
- * 问题需要做资源池
- */
 public class IpProxyFactory extends IpResourceData implements PooledObjectFactory<IpProxy> {
 
     public IpProxy create(){
-
-        System.out.println("获取");
         try {
             return this.getIP();
         } catch (InterruptedException e) {
@@ -63,7 +58,7 @@ public class IpProxyFactory extends IpResourceData implements PooledObjectFactor
 
     @Override
     public boolean validateObject(PooledObject<IpProxy> pooledObject) {
-        return NetStateUtil.connecting(pooledObject.getObject(),300, TimeUnit.MILLISECONDS);
+        return false;
     }
 
 //    ProxyResource resource = new Ip3366Resource(1,1,10);
